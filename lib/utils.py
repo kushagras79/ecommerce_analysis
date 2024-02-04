@@ -4,8 +4,8 @@ from pyspark.sql import SparkSession
 def getSparkSession():
     spark = SparkSession.builder.\
     appName('Ecom analysis').\
-    master('Local[2]').\
-    .getOrCreate()
+    master('local[2]').\
+    getOrCreate()
     return spark
 
 
