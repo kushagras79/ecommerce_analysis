@@ -35,4 +35,5 @@ if __name__ == "__main__":
     products_df = dataTransformation.dropCol(products_df,['product_category_name'])
     products_df = dataTransformation.renameCol(products_df,'product_category_name_english','product_category_name')
     dataWriter.writeDf(products_df,'data/curated/products/')
+    print('data is written till curated layer.')
     spark.stop()
