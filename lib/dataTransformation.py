@@ -20,3 +20,7 @@ def aggregation(df,col_list,col1):
 
 def selectCol(df,col_list):
     return df.select(*col_list)
+
+def filterDf(df,col_name,value):
+    df = df.filter(f'{col_name} == "{value}"')
+    return df
