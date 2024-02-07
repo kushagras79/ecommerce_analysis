@@ -106,3 +106,11 @@ def get_products_category_schema():
 def read_products_category():
     spark = getSparkSession()
     return spark.read.format('csv').schema(get_products_category_schema()).load('data/raw/product_category_name_translation.csv')
+
+
+def create_df(mySchema,filePath):
+    spark = getSparkSession()
+    df = spark.read.format('csv').schema(mySchema).option('mode','permissive').\
+        option('header','true').option('inferSchema','false').\
+        load(f'{filePath}')
+    return df
