@@ -6,6 +6,7 @@ if __name__ == "__main__":
     print('spark session is created.')
     #getting customers data
     cust_df = dataReader.create_df(dataReader.get_customers_schema(),'data/raw/olist_customers_dataset.csv')
+    cust_df.show()
     cust_df = dataTransformation.renameCol(cust_df,'customer_zip_code_prefix','customer_zip_code')
     #gettung sellers information.
     sellersDf = dataReader.create_df(dataReader.get_seller_schema(),'data/raw/olist_sellers_dataset.csv')
@@ -16,6 +17,9 @@ if __name__ == "__main__":
     joined_df = dataTransformation.renameCol(joined_df,'customer_city','city')
     joined_df = dataTransformation.renameCol(joined_df,'customer_state','state')
     joined_df = dataTransformation.dropCol(joined_df,['seller_zip_code','seller_city','seller_state'])
+    print(joined_df.count())
+    joined_df = dataTransformation.filterDf(joined_df,'city','campinas')
+    print(joined_df.count())
     dataWriter.writeDf(joined_df,'data/curated/customer_sellers/')
 
     # reading orders data.
